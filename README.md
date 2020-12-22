@@ -60,4 +60,5 @@
 
 ### Association
 - belongs_to :items
+- belongs_to :items
 - has_one :addresses
