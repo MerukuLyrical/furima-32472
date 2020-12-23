@@ -44,7 +44,7 @@
 |address        |string     |null:false                   |
 |building       |string     |                             |
 |phone_number   |string     |null:false                   |
-|buying_logs    |reference  |null:false ,foreign_key: true|
+|buying_log     |reference  |null:false ,foreign_key: true|
 
 ### Association
 - belongs_to :buying_log
