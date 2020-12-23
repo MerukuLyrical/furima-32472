@@ -38,11 +38,10 @@
 ## addressesテーブル
 |Column         |Type       |Options                      |
 |:--------------|:----------|:----------------------------|
-|name           |references |null:false                   |
 |postal_code    |string     |null:false                   |
-|pref           |string     |null:false                   |
+|area_id        |string     |null:false                   |
 |city           |string     |null:false                   |
-|address        |text       |null:false                   |
+|address        |string     |null:false                   |
 |building       |string     |                             |
 |phone_number   |string     |null:false                   |
 |buying_logs_id |reference  |null:false ,foreign_key: true|
