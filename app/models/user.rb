@@ -17,7 +17,8 @@ class User < ApplicationRecord
   with_options presence: true do
   validates :name
   validates :birthday
-  validates :email, uniqueness: true
+  validates :email
+  validates :password
   end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
