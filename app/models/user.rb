@@ -14,9 +14,11 @@ class User < ApplicationRecord
     validates :last_name_kana
   end
 
-  validates :name, presence: true
-  validates :birthday, presence: true
+  with_options presence: true do
+  validates :name
+  validates :birthday
   validates :email, uniqueness: true
+  end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字を混合して設定してください'
