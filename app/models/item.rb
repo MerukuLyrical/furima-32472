@@ -7,6 +7,13 @@ class Item < ApplicationRecord
   belongs_to :status
   has_one_attached :image
 
+  with_options presence: true do
+    validates :title
+    validates :explaining
+    validates :price
+    validates :image
+  end
+
 
 
   validates :area_id,         numericality: { other_than: 1 } 
