@@ -5,8 +5,9 @@ class Item < ApplicationRecord
   belongs_to :delivary_fee
   belongs_to :need_day
   belongs_to :status
+  has_one_attached :image
 
-  
+
 
   validates :area_id,         numericality: { other_than: 1 } 
   validates :category_id,     numericality: { other_than: 1 } 
