@@ -15,12 +15,14 @@ class Item < ApplicationRecord
   end
 
   validates_inclusion_of :price, in: 300..9999999
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: 'には半角数字を使用してください' }
 
 
-
-  validates :area_id,         numericality: { other_than: 1 } 
+  validates :area_id,         numericality: { other_than: 1 }
   validates :category_id,     numericality: { other_than: 1 } 
   validates :delivary_fee_id, numericality: { other_than: 1 } 
   validates :need_day_id,     numericality: { other_than: 1 } 
   validates :status_id,       numericality: { other_than: 1 } 
+
+  belongs_to :user
 end
