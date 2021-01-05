@@ -14,6 +14,8 @@ class Item < ApplicationRecord
     validates :image
   end
 
+  validates_inclusion_of :price, in: 300..9999999
+
 
 
   validates :area_id,         numericality: { other_than: 1 } 
