@@ -26,4 +26,5 @@ with_options numericality: { other_than: 1 } do
 end
 
   belongs_to :user
+  has_one :buying_log
 end
