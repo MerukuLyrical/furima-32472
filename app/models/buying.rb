@@ -9,8 +9,9 @@ class Buying
     validates :phone_number,  format: { with: /\A\d{10,11}\z/, message: 'はハイフン(-)なしで入力してください'}
     validates :token
   end
+  
 
-  validates :area_id,  numericality: { other_than: 0, message: "can't be blank" }
+  validates :area_id,  numericality: { other_than: 1 }
 
   def save
     buying_log = BuyingLog.create( user_id: user_id, item_id: item_id )
