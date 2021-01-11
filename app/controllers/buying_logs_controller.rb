@@ -1,5 +1,6 @@
 class BuyingLogsController < ApplicationController
   before_action :authenticate_user!
+  before_action :return_to_index
 
   def index
     @item = Item.find(params[:item_id])
@@ -34,4 +35,12 @@ class BuyingLogsController < ApplicationController
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
+
+  def return_to_index
+    @item = Item.find(params[:item_id])
+    if @item.buying_log.present?
+      redirect_to root_path
+    end
+  end
+
 end
