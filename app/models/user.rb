@@ -15,10 +15,10 @@ class User < ApplicationRecord
   end
 
   with_options presence: true do
-  validates :name
-  validates :birthday
-  validates :email
-  validates :password
+    validates :name
+    validates :birthday
+    validates :email
+    validates :password
   end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze

@@ -10,7 +10,7 @@ RSpec.describe Buying, type: :model do
   describe '購入が正常に完了する時' do
     it '各フォームを入力すれば出品できること' do
       expect(@buying).to be_valid
-      end
+    end
   end
 
   describe '購入が完了しない時' do
@@ -20,15 +20,15 @@ RSpec.describe Buying, type: :model do
       expect(@buying.errors.full_messages).to include("Postal code can't be blank")
     end
     it '郵便番号は半角数字以外使用できない' do
-      @buying.postal_code = "試験用"
+      @buying.postal_code = '試験用'
       @buying.valid?
-      expect(@buying.errors.full_messages).to include("Postal code を入力してください")
+      expect(@buying.errors.full_messages).to include('Postal code を入力してください')
     end
 
     it '郵便番号はハイフンがないとエラーが出る' do
-      @buying.postal_code = "1111111"
+      @buying.postal_code = '1111111'
       @buying.valid?
-      expect(@buying.errors.full_messages).to include("Postal code を入力してください")
+      expect(@buying.errors.full_messages).to include('Postal code を入力してください')
     end
 
     it '都道府県は空欄(--)だとエラーが出る' do
@@ -36,7 +36,6 @@ RSpec.describe Buying, type: :model do
       @buying.valid?
       expect(@buying.errors.full_messages).to include('Area must be other than 1')
     end
-
 
     it '市町村は空欄だとエラーが出る' do
       @buying.city = nil
@@ -57,9 +56,9 @@ RSpec.describe Buying, type: :model do
     end
 
     it '電話番号はハイフンがあるとエラーが出る' do
-      @buying.phone_number = "000-0000-0000"
+      @buying.phone_number = '000-0000-0000'
       @buying.valid?
-      expect(@buying.errors.full_messages).to include("Phone number はハイフン(-)なしで入力してください")
+      expect(@buying.errors.full_messages).to include('Phone number はハイフン(-)なしで入力してください')
     end
 
     it 'トークンは空欄だとエラーが出る' do
@@ -67,14 +66,5 @@ RSpec.describe Buying, type: :model do
       @buying.valid?
       expect(@buying.errors.full_messages).to include("Token can't be blank")
     end
-
-
-
-
-
-
-
-
-
   end
 end

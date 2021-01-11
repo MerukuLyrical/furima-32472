@@ -14,16 +14,16 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates_inclusion_of :price, in: 300..9999999
+  validates_inclusion_of :price, in: 300..9_999_999
   validates :price, format: { with: /\A[0-9]+\z/, message: 'には半角数字を使用してください' }
 
-with_options numericality: { other_than: 1 } do
-  validates :area_id
-  validates :category_id
-  validates :delivary_fee_id
-  validates :need_day_id
-  validates :status_id
-end
+  with_options numericality: { other_than: 1 } do
+    validates :area_id
+    validates :category_id
+    validates :delivary_fee_id
+    validates :need_day_id
+    validates :status_id
+  end
 
   belongs_to :user
   has_one :buying_log
