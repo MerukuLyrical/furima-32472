@@ -15,12 +15,15 @@ class User < ApplicationRecord
   end
 
   with_options presence: true do
-  validates :name
-  validates :birthday
-  validates :email
-  validates :password
+    validates :name
+    validates :birthday
+    validates :email
+    validates :password
   end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字を混合して設定してください'
+
+  has_many :buying_logs
+  has_many :items
 end
