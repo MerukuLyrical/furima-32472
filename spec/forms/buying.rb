@@ -2,13 +2,19 @@ require 'rails_helper'
 
 RSpec.describe Buying, type: :model do
   before do
-    @buying = FactoryBot.build(:buying)
-    item_id = FactoryBot.build(:item)
-    user_id = FactoryBot.build(:user)
+    item = FactoryBot.create(:item)
+    user = FactoryBot.create(:user)
+    @buying = FactoryBot.build(:buying, user_id: user.id, item_id: item.id)
+    sleep 0.1  
   end
 
   describe '購入が正常に完了する時' do
-    it '各フォームを入力すれば出品できること' do
+    it '各フォームを入力すれば購入できること' do
+      expect(@buying).to be_valid
+    end
+
+    it '建物(building)は空でも購入できること' do
+      @buying.building = nil
       expect(@buying).to be_valid
     end
   end
@@ -58,7 +64,25 @@ RSpec.describe Buying, type: :model do
     it '電話番号はハイフンがあるとエラーが出る' do
       @buying.phone_number = '000-0000-0000'
       @buying.valid?
-      expect(@buying.errors.full_messages).to include('Phone number はハイフン(-)なしで入力してください')
+      expect(@buying.errors.full_messages).to include('Phone number はハイフン(-)なしで10桁or11桁で入力してください')
+    end
+
+    it '電話番号は12桁以上だとエラーが出る' do
+      @buying.phone_number = '090123456789'
+      @buying.valid?
+      expect(@buying.errors.full_messages).to include('Phone number はハイフン(-)なしで10桁or11桁で入力してください')
+    end
+
+    it 'item_idは空欄だとエラーが出る' do
+      @buying.item_id = nil
+      @buying.valid?
+      expect(@buying.errors.full_messages).to include("Item can't be blank")
+    end
+
+    it 'user_idは空欄だとエラーが出る' do
+      @buying.user_id = nil
+      @buying.valid?
+      expect(@buying.errors.full_messages).to include("User can't be blank")
     end
 
     it 'トークンは空欄だとエラーが出る' do

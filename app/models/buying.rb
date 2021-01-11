@@ -6,8 +6,10 @@ class Buying
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'を入力してください' }
     validates :city
     validates :address
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'はハイフン(-)なしで入力してください' }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'はハイフン(-)なしで10桁or11桁で入力してください' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   validates :area_id, numericality: { other_than: 1 }

@@ -3,16 +3,13 @@ class BuyingLogsController < ApplicationController
   before_action :return_to_index
 
   def index
-    @item = Item.find(params[:item_id])
     @buying = Buying.new
   end
 
   # アイテムの値段を取り出す記述を行う
 
   def create
-    @item = Item.find(params[:item_id])
     @buying = Buying.new(buying_params)
-    @item_price = @item.price
     if @buying.valid?
       pay_item
       @buying.save
@@ -33,7 +30,7 @@ class BuyingLogsController < ApplicationController
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: @item_price, # 商品の値段
+      amount: @item.price, # 商品の値段
       card: buying_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
@@ -41,6 +38,6 @@ class BuyingLogsController < ApplicationController
 
   def return_to_index
     @item = Item.find(params[:item_id])
-    redirect_to root_path if @item.buying_log.present?
+    redirect_to root_path if @item.buying_log.present? || current_user.id == @item.user.id
   end
 end
